@@ -7,3 +7,11 @@ version          "0.1"
 
 recipe "freeswitch", "Installs/configures FreeSWITCH."
 recipe "freeswitch::security", "Installs OS level security requirements for FreeSWITCH."
+
+attribute 'freeswitch/template/fqdn',
+:display_name => "FQDN",
+:description => "The FQDN for the FreeSwitch Server",
+:type => "string",
+:required => "required",
+:recipes => ["freeswitch::default"]
+
