@@ -147,7 +147,7 @@
        use different addresses where this variable appears.
        Used by: dingaling.conf.xml
   -->
-  <X-PRE-PROCESS cmd="set" data="bind_server_ip=auto"/>
+  <X-PRE-PROCESS cmd="set" data="bind_server_ip=<%= node[:freeswitch][:external_ip] %>"/>
 
   <!-- NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE
        
@@ -165,7 +165,7 @@
        If unspecified, the bind_server_ip value is used.
        Used by: sofia.conf.xml dingaling.conf.xml
   -->
-  <X-PRE-PROCESS cmd="set" data="external_rtp_ip=stun:stun.freeswitch.org"/>
+  <X-PRE-PROCESS cmd="set" data="external_rtp_ip=<%= node[:freeswitch][:external_ip] %>"/>
 
   <!-- external_sip_ip
       Used as the public IP address for SDP.
@@ -178,7 +178,7 @@
        If unspecified, the bind_server_ip value is used.
        Used by: sofia.conf.xml dingaling.conf.xml
   -->
-  <X-PRE-PROCESS cmd="set" data="external_sip_ip=stun:stun.freeswitch.org"/>
+  <X-PRE-PROCESS cmd="set" data="external_sip_ip=<%= node[:freeswitch][:external_ip] %>"/>
 
   <!-- unroll-loops
        Used to turn on sip loopback unrolling.
@@ -190,8 +190,8 @@
        Used by: conference.conf.xml and user directory for default
        outbound callerid name and number.
   -->
-  <X-PRE-PROCESS cmd="set" data="outbound_caller_name=FreeSWITCH"/>
-  <X-PRE-PROCESS cmd="set" data="outbound_caller_id=0000000000"/>
+  <X-PRE-PROCESS cmd="set" data="outbound_caller_name=<%= node[:freeswitch][:callerid_name] %>"/>
+  <X-PRE-PROCESS cmd="set" data="outbound_caller_id=<%= node[:freeswitch][:callerid_num] %>"/>
 
   <!-- various debug and defaults -->
   <X-PRE-PROCESS cmd="set" data="call_debug=false"/>
@@ -237,12 +237,12 @@
       
       These are for conf/directory/default/example.com.xml
   -->
-  <X-PRE-PROCESS cmd="set" data="default_provider=example.com"/>
-  <X-PRE-PROCESS cmd="set" data="default_provider_username=joeuser"/>
-  <X-PRE-PROCESS cmd="set" data="default_provider_password=password"/>
-  <X-PRE-PROCESS cmd="set" data="default_provider_from_domain=example.com"/>
+  <X-PRE-PROCESS cmd="set" data="default_provider=<%= node[:freeswitch][:provider_domain] %>"/>
+  <X-PRE-PROCESS cmd="set" data="default_provider_username=<%= node[:freeswitch][:provider_username] %>"/>
+  <X-PRE-PROCESS cmd="set" data="default_provider_password=<%= node[:freeswitch][:provider_password] %>"/>
+  <X-PRE-PROCESS cmd="set" data="default_provider_from_domain=<%= node[:freeswitch][:provider_fromdomain] %>"/>
   <!-- true or false -->
-  <X-PRE-PROCESS cmd="set" data="default_provider_register=false"/>
+  <X-PRE-PROCESS cmd="set" data="default_provider_register=<%= node[:freeswitch][:provider_register] %>"/>
   <X-PRE-PROCESS cmd="set" data="default_provider_contact=5000"/>
 
   <!--
